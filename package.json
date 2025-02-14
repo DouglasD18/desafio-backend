@@ -1,10 +1,15 @@
 {
-  "name": "contato-seguro",
+  "name": "desafio-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build && node dist/main/server.js",
+    "build": "rm -rf dist && tsc",
+    "dev": "tsnd src/main/server.ts",
+    "test": "jest --watch --runInBand",
+    "test:unit": "npm test -- --silent -c jest-unit-config.js",
+    "test:integration": "npm test -- --silent -c jest-integration-config.js"
   },
   "keywords": [],
   "author": "",
