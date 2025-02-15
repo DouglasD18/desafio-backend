@@ -2,7 +2,7 @@ import { CreateUserPayload, CreateUserResponse, Validated } from "@/domain/model
 import { CreateUser, Validator } from "@/domain/useCases/user";
 import { CreateUserController } from "@/presentation/controllers/user/create-user";
 import { BadRequestError, InternalServerError } from "@/presentation/errors";
-import { HttpRequest, HttpResponse } from "@/presentation/protocols";
+import { HttpRequest } from "@/presentation/protocols";
 
 const VALIDATED: Validated = {
   isValid: true
@@ -11,7 +11,7 @@ const VALIDATED: Validated = {
 const BODY: CreateUserPayload = {
   name: "any_name",
   email: "any_email",
-  password: "any_senha0"
+  password: "any_Senha0"
 }
 
 const REQUEST: HttpRequest = {
