@@ -1,4 +1,4 @@
-import { CreateUserModel } from "@/data/protocols/user";
+import { CreateUserRepository } from "@/data/protocols/user";
 import { CreateUserAdapter } from "@/data/useCases/user";
 import { CreateUserPayload, CreateUserResponse } from "@/domain/models/user";
 
@@ -12,45 +12,45 @@ const PAYLOAD: CreateUserPayload = {
   password: "ValidPassword123!"
 };
 
-const makeCreateUserModelStub = (): CreateUserModel => {
-  class CreateUserModelStub implements CreateUserModel {
+const makeCreateUserRepositoryStub = (): CreateUserRepository => {
+  class CreateUserRepositoryStub implements CreateUserRepository {
     handle(data: CreateUserPayload): Promise<string> {
       return new Promise(resolve => resolve("valid_id"));
     }
   }
 
-  return new CreateUserModelStub();
+  return new CreateUserRepositoryStub();
 };
 
 interface SutTypes {
   sut: CreateUserAdapter;
-  createUserModelStub: CreateUserModel;
+  createUserRepositoryStub: CreateUserRepository;
 }
 
 const makeSut = (): SutTypes => {
-  const createUserModelStub = makeCreateUserModelStub();
-  const sut = new CreateUserAdapter(createUserModelStub);
+  const createUserRepositoryStub = makeCreateUserRepositoryStub();
+  const sut = new CreateUserAdapter(createUserRepositoryStub);
 
   return {
     sut,
-    createUserModelStub
+    createUserRepositoryStub
   };
 };
 
 describe("CreateUserAdapter", () => {
-  it("Should call CreateUserModel with correct values", async () => {
-    const { sut, createUserModelStub } = makeSut();
+  it("Should call CreateUserRepository with correct values", async () => {
+    const { sut, createUserRepositoryStub } = makeSut();
 
-    const createUserSpy = jest.spyOn(createUserModelStub, "handle");
+    const createUserSpy = jest.spyOn(createUserRepositoryStub, "handle");
     await sut.handle(PAYLOAD);
 
     expect(createUserSpy).toHaveBeenCalledWith(PAYLOAD);
   });
 
-  it("Should throw if CreateUserModel throws", async () => {
-    const { sut, createUserModelStub } = makeSut();
+  it("Should throw if CreateUserRepository throws", async () => {
+    const { sut, createUserRepositoryStub } = makeSut();
 
-    jest.spyOn(createUserModelStub, "handle").mockImplementationOnce(() => {
+    jest.spyOn(createUserRepositoryStub, "handle").mockImplementationOnce(() => {
       throw new Error();
     });
 
