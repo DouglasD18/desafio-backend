@@ -1,16 +1,16 @@
-import { CreateUserModel } from "@/data/protocols/user";
+import { CreateUserRepository } from "@/data/protocols/user";
 import { CreateUserPayload, CreateUserResponse } from "@/domain/models/user";
 import { CreateUser } from "@/domain/useCases/user";
 
 export class CreateUserAdapter implements CreateUser {
-  private readonly createUserModel: CreateUserModel;
+  private readonly createUserRepository: CreateUserRepository;
 
-  constructor(createUserModel: CreateUserModel) {
-    this.createUserModel = createUserModel;
+  constructor(createUserRepository: CreateUserRepository) {
+    this.createUserRepository = createUserRepository;
   }
 
   async handle(data: CreateUserPayload): Promise<CreateUserResponse> {
-    const id = await this.createUserModel.handle(data);
+    const id = await this.createUserRepository.handle(data);
     return { id };
   }
   
