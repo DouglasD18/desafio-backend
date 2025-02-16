@@ -1,63 +1,38 @@
 import { UpdateUserAdapter } from "@/data/useCases/user";
-import { UpdateUserRepository, ListUsersRepository } from "@/data/protocols/user";
-import { UpdateUserPayload, User } from "@/domain/models/user";
+import { UpdateUserRepository } from "@/data/protocols/user";
+import { UpdateUserPayload } from "@/domain/models/user";
 
-const VALID_USER: User = {
+const PAYLOAD = {
   id: "valid_id",
   name: "valid_name",
   email: "valid_email@example.com",
-};
-
-const PAYLOAD = {
-  ...VALID_USER,
   password: "new_password"
 }
 
 const makeUpdateUserRepositoryStub = (): UpdateUserRepository => {
   class UpdateUserRepositoryStub implements UpdateUserRepository {
-    async handle(data: UpdateUserPayload): Promise<void> {
-      return new Promise(resolve => resolve());
+    async handle(data: UpdateUserPayload): Promise<boolean> {
+      return new Promise(resolve => resolve(true));
     }
   }
   return new UpdateUserRepositoryStub();
 };
 
-const makeListUsersRepositoryStub = (): ListUsersRepository => {
-  class ListUsersRepositoryStub implements ListUsersRepository {
-    async handle(): Promise<User[]> {
-      return new Promise(resolve => resolve([VALID_USER]));
-    }
-  }
-  return new ListUsersRepositoryStub();
-};
-
 interface SutTypes {
   sut: UpdateUserAdapter;
-  listUsersRepositoryStub: ListUsersRepository;
   updateUserRepositoryStub: UpdateUserRepository;
 }
 
 const makeSut = (): SutTypes => {
-  const listUsersRepositoryStub = makeListUsersRepositoryStub();
   const updateUserRepositoryStub = makeUpdateUserRepositoryStub();
-  const sut = new UpdateUserAdapter(updateUserRepositoryStub, listUsersRepositoryStub);
+  const sut = new UpdateUserAdapter(updateUserRepositoryStub);
   return {
     sut,
-    listUsersRepositoryStub,
     updateUserRepositoryStub,
   };
 };
 
 describe("UpdateUserAdapter", () => {
-  it("should call ListUsersRepository", async () => {
-    const { sut, listUsersRepositoryStub } = makeSut();
-
-    const listUsersSpy = jest.spyOn(listUsersRepositoryStub, "handle");
-    await sut.handle(PAYLOAD);
-
-    expect(listUsersSpy).toHaveBeenCalled();
-  });
-
   it("should call UpdateUserRepository if the user is found", async () => {
     const { sut, updateUserRepositoryStub } = makeSut();
 
@@ -65,25 +40,6 @@ describe("UpdateUserAdapter", () => {
     await sut.handle(PAYLOAD);
 
     expect(updateUserSpy).toHaveBeenCalledWith(PAYLOAD);
-  });
-
-  it("should return undefined if user is not found", async () => {
-    const { sut, listUsersRepositoryStub } = makeSut();
-    jest.spyOn(listUsersRepositoryStub, "handle").mockResolvedValueOnce([]);
-    const result = await sut.handle(PAYLOAD);
-    expect(result).toBeUndefined(); 
-  });
-
-  it("should throw an error if ListUsersRepository throws", async () => {
-    const { sut, listUsersRepositoryStub } = makeSut();
-
-    jest.spyOn(listUsersRepositoryStub, "handle").mockImplementationOnce(() => {
-      throw new Error();
-    });
-
-    const promise = sut.handle(PAYLOAD);
-
-    expect(promise).rejects.toThrow();
   });
 
   it("should throw an error if UpdateUserRepository throws", async () => {
@@ -98,11 +54,22 @@ describe("UpdateUserAdapter", () => {
     expect(promise).rejects.toThrow();
   });
 
-  it("should return the user on success", async () => {
+  it("should return false if UpdateUserRepository returns false", async () => {
+    const { sut, updateUserRepositoryStub } = makeSut();
+
+    jest.spyOn(updateUserRepositoryStub, "handle").mockImplementationOnce(() => {
+      return new Promise(resolve => resolve(false));
+    });
+    const result = await sut.handle(PAYLOAD);
+
+    expect(result).toEqual(false);
+  });
+
+  it("should return true on success", async () => {
     const { sut } = makeSut();
 
     const result = await sut.handle(PAYLOAD);
 
-    expect(result).toEqual(VALID_USER); 
+    expect(result).toEqual(true); 
   });
 });

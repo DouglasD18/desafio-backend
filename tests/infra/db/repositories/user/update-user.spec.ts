@@ -25,7 +25,7 @@ describe("UpdateUserMongooseRepository", () => {
   it("should update the user", async () => {
     const repository = new UpdateUserMongooseRepository();
 
-    await repository.handle({
+    const result = await repository.handle({
       id: userId,
       name: "John Doe",
       email: "john_doe@example.com",
@@ -34,9 +34,23 @@ describe("UpdateUserMongooseRepository", () => {
 
     const updatedUser = await UserModel.findById(userId);
 
+    expect(result).toBe(true);
     expect(updatedUser).toBeDefined();
     expect(updatedUser?.name).toBe("John Doe");
     expect(updatedUser?.email).toBe("john_doe@example.com");
     expect(updatedUser?.password).toBe("securePassword123!");
+  });
+
+  it("should return false if user does not exists", async () => {
+    const repository = new UpdateUserMongooseRepository();
+
+    const result = await repository.handle({
+      id: "65b172bd7c863c5b7732c559",
+      name: "John Doe",
+      email: "john_doe@example.com",
+      password: "XXXXXXXXXXXXXXXXX!"
+    });
+
+    expect(result).toBe(false);
   });
 });

@@ -1,4 +1,4 @@
-import { UpdateUserPayload, Validated, User } from "@/domain/models/user";
+import { UpdateUserPayload, Validated } from "@/domain/models/user";
 import { UpdateUser, Validator } from "@/domain/useCases/user";
 import { UpdateUserController } from "@/presentation/controllers/user/update-user";
 import { BadRequestError, InternalServerError, NotFoundError } from "@/presentation/errors";
@@ -11,12 +11,6 @@ const VALIDATED: Validated = {
 const BODY = {
   name: "updated_name",
   email: "updated_email@example.com"
-}
-
-const USER: User = {
-  id: "any_id",
-  name: "any_name",
-  email: "any_email@example.com"
 }
 
 const REQUEST: HttpRequest = {
@@ -32,8 +26,8 @@ interface SutTypes {
 
 const makeUpdateUserStub = (): UpdateUser => {
   class UpdateUserStub implements UpdateUser {
-    handle(payload: UpdateUserPayload): Promise<User> {
-      return new Promise(resolve => resolve(USER));
+    handle(payload: UpdateUserPayload): Promise<boolean> {
+      return new Promise(resolve => resolve(true));
     }
   }
 
@@ -99,7 +93,7 @@ describe('UpdateUserController', () => {
   it('Should return 404 if UpdateUser return no user', async () => {
     const { sut, updateUserStub } = makeSut();
 
-    jest.spyOn(updateUserStub, "handle").mockResolvedValueOnce(null);
+    jest.spyOn(updateUserStub, "handle").mockResolvedValueOnce(false);
     const httpResponse = await sut.handle(REQUEST);
 
     expect(httpResponse.body).toEqual(new NotFoundError("Usuário não encontrado"));

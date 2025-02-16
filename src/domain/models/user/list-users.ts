@@ -1,6 +1,6 @@
 export type ListUsersResponse = User[]
 
-export type User = {
+type User = {
   id: string;
   name: string;
   email: string;

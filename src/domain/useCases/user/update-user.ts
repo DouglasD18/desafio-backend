@@ -1,5 +1,5 @@
-import { UpdateUserPayload, User } from "../../models/user";
+import { UpdateUserPayload } from "../../models/user";
 
 export interface UpdateUser {
-  handle(data: UpdateUserPayload): Promise<User>
+  handle(data: UpdateUserPayload): Promise<boolean>
 }

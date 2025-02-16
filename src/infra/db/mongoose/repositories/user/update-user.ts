@@ -3,8 +3,9 @@ import { UpdateUserPayload } from "../../../../../domain/models/user";
 import { UserModel } from "../../schemas/user";
 
 export class UpdateUserMongooseRepository implements UpdateUserRepository {
-  async handle(payload: UpdateUserPayload): Promise<void> {
+  async handle(payload: UpdateUserPayload): Promise<boolean> {
     const { id, ...updateData } = payload;
-    await UserModel.updateOne({ _id: id }, { $set: updateData });
+    const result = await UserModel.updateOne({ _id: id }, { $set: updateData });
+    return result.modifiedCount > 0;
   }
 }
