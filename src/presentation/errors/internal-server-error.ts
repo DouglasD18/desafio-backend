@@ -4,4 +4,8 @@ export class InternalServerError extends Error {
     this.name = "ServerError"
     this.message = message
   }
+
+  toJSON() {
+    return { message: this.message };
+  }
 }

@@ -3,4 +3,8 @@ export class NotFoundError extends Error {
     super("Not Found Error!");
     this.message = message;
   }
+
+  toJSON() {
+    return { message: this.message };
+  }
 }

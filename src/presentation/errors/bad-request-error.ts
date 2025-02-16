@@ -3,4 +3,8 @@ export class BadRequestError extends Error {
     super("Bad Request Error!");
     this.message = message;
   }
+
+  toJSON() {
+    return { message: this.message };
+  }
 }
