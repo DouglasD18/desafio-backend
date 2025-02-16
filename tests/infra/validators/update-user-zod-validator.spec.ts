@@ -1,9 +1,8 @@
 import { UpdateUserZodValidator } from "@/infra/validators";
 import { Validated } from "@/domain/models/user";
-import { randomUUID } from "crypto";
 
 const PAYLOAD = {
-  id: randomUUID(), 
+  id: "65b172bd7c863c5b7732c559", 
   name: "John Doe",
   email: "john.doe@example.com",
   password: "SenhaForte123!"
