@@ -17,11 +17,11 @@ const USER: User = {
 };
 
 const REQUEST: HttpRequest = {
-  params: { userId: USER_ID },
   body: {
     title: "Task Test",
     description: "Task description",
-    status: TaskStatus.PENDING
+    status: TaskStatus.PENDING,
+    userId: USER_ID
   }
 };
 

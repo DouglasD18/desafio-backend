@@ -15,22 +15,20 @@ export class CreateTaskController implements Controller {
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { userId } = httpRequest.params;
     const body = httpRequest.body;
-    const payload = { ...body, userId }
 
-    const validated = this.validator.handle(payload);
+    const validated = this.validator.handle(body);
     if (!validated.isValid) {
       return badRequest(validated.message!)
     }
 
     try {
-      const user = await this.listUserById.handle(userId);
+      const user = await this.listUserById.handle(body.userId);
       if (!user) {
         return notFound("Usuário não encontrado");
       }
 
-      const { id } = await this.createTask.handle(payload);
+      const { id } = await this.createTask.handle(body);
       return created(id);
     } catch (error: unknown) { 
       if (error instanceof Error) { 
