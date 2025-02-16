@@ -1,7 +1,7 @@
-import { CreateUserAdapter } from "@/data/useCases/user";
-import { CreateUserMongooseRepository } from "@/infra/db/mongoose/repositories/user";
-import { ZodValidator } from "@/infra/validators/zod-validator";
-import { CreateUserController } from "@/presentation/controllers/user/create-user";
+import { CreateUserAdapter } from "../../../data/useCases/user";
+import { CreateUserMongooseRepository } from "../../../infra/db/mongoose/repositories/user";
+import { ZodValidator } from "../../../infra/validators/zod-validator";
+import { CreateUserController } from "../../../presentation/controllers/user/create-user";
 
 export const makeCreateUserController = (): CreateUserController => {
   const repository = new CreateUserMongooseRepository();

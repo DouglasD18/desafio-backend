@@ -1,6 +1,6 @@
-import { CreateUser, Validator } from "@/domain/useCases/user";
-import { badRequest, created, internalServerError } from "@/presentation/helpers/http";
-import { Controller, HttpRequest, HttpResponse } from "@/presentation/protocols";
+import { CreateUser, Validator } from "../../../domain/useCases/user";
+import { badRequest, created, internalServerError } from "../../helpers/http";
+import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 
 export class CreateUserController implements Controller {
   private readonly createUser: CreateUser;

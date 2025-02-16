@@ -1,6 +1,6 @@
-import { CreateUserRepository } from "@/data/protocols/user";
-import { CreateUserPayload, CreateUserResponse } from "@/domain/models/user";
-import { CreateUser } from "@/domain/useCases/user";
+import { CreateUserRepository } from "../../protocols/user";
+import { CreateUserPayload, CreateUserResponse } from "../../../domain/models/user";
+import { CreateUser } from "../../../domain/useCases/user";
 
 export class CreateUserAdapter implements CreateUser {
   private readonly createUserRepository: CreateUserRepository;

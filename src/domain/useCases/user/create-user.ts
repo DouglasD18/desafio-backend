@@ -1,4 +1,4 @@
-import { CreateUserPayload, CreateUserResponse } from "@/domain/models/user";
+import { CreateUserPayload, CreateUserResponse } from "../../models/user";
 
 export interface CreateUser {
   handle(data: CreateUserPayload): Promise<CreateUserResponse>

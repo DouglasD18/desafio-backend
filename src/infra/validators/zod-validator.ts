@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Validated } from "@/domain/models/user";
-import { Validator } from "@/domain/useCases/user";
+import { Validated } from "../../domain/models/user";
+import { Validator } from "../../domain/useCases/user";
 
 export class ZodValidator implements Validator {
   private schema = z.object({
