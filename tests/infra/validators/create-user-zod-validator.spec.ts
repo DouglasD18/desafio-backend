@@ -1,4 +1,4 @@
-import { ZodValidator } from "@/infra/validators/zod-validator";
+import { CreateUserZodValidator } from "@/infra/validators";
 import { Validated } from "@/domain/models/user";
 
 const PAYLOAD = {
@@ -7,11 +7,11 @@ const PAYLOAD = {
   password: "SenhaForte123!"
 }
 
-describe("ZodValidator", () => {
-  let validator: ZodValidator;
+describe("CreateUserZodValidator", () => {
+  let validator: CreateUserZodValidator;
 
   beforeEach(() => {
-    validator = new ZodValidator();
+    validator = new CreateUserZodValidator();
   });
 
   it("Should return isValid false if name is too short", () => {
