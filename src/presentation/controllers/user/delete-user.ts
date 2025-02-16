@@ -14,7 +14,7 @@ export class DeleteUserController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const id = httpRequest.params.id;
     
-    const validated = this.validator.handle(id);
+    const validated = this.validator.handle({ id });
     if (!validated.isValid) {
       return badRequest(validated.message!)
     }
