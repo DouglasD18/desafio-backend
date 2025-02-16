@@ -9,8 +9,7 @@ const _httpResponse: HttpRequest = {}
 const USERS: ListUsersResponse = [{
   id: "any_id",
   name: "any_name",
-  email: "any_email",
-  password: "any_password"
+  email: "any_email"
 }]
 
 interface SutTypes {

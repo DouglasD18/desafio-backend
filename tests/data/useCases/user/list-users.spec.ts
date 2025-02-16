@@ -5,8 +5,7 @@ import { ListUsersResponse } from "@/domain/models/user";
 const LIST_USERS_RESPONSE: ListUsersResponse = [{
   id: "valid_id",
   name: "valid_name",
-  email: "valid_email@example.com",
-  password: "ValidPassword123!"
+  email: "valid_email@example.com"
 }];
 
 const makeListUsersRepositoryStub = (): ListUsersRepository => {
