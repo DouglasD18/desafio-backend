@@ -2,9 +2,9 @@ import { z } from "zod";
 import { Validated } from "../../domain/models/user";
 import { Validator } from "../../domain/useCases/user";
 
-export class ZodValidator implements Validator {
+export class CreateUserZodValidator implements Validator {
   private schema = z.object({
-    name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres").max(50, "O nome pode ter no máximo 50 caracteres"),
+    name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres").max(120, "O nome pode ter no máximo 120 caracteres"),
     email: z.string().email("E-mail inválido"),
     password: z.string()
       .min(8, "A senha deve ter pelo menos 8 caracteres")
