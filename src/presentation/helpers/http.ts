@@ -25,3 +25,7 @@ export const notFound = (message: string): HttpResponse => ({
   statusCode: 404,
   body: new NotFoundError(message)
 });
+
+export const noContent = (): HttpResponse => ({
+  statusCode: 204
+});
