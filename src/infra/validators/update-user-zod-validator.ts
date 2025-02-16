@@ -2,9 +2,11 @@ import { z } from "zod";
 import { Validated } from "../../domain/models/user";
 import { Validator } from "../../domain/useCases/user";
 
+const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+
 export class UpdateUserZodValidator implements Validator {
   private schema = z.object({
-    id: z.string().uuid("Id inválido"),
+    id: z.string().regex(objectIdRegex, "Id inválido"),
     name: z.string().min(3, "O nome deve ter pelo menos 3 caracteres").max(120, "O nome pode ter no máximo 120 caracteres").optional(),
     email: z.string().email("E-mail inválido").optional(),
     password: z.string()
