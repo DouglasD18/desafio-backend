@@ -59,7 +59,7 @@ describe('DeleteUserController', () => {
     const ValidateSpy = jest.spyOn(validatorStub, "handle");
     await sut.handle(REQUEST);
 
-    expect(ValidateSpy).toHaveBeenCalledWith(id);
+    expect(ValidateSpy).toHaveBeenCalledWith({ id });
   });
 
   it('Should return 400 if validated.isValid is false', async () => {
