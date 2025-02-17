@@ -7,6 +7,7 @@ import { env } from "@/main/config/env";
 describe("CreateTaskMongooseRepository", () => {
   beforeAll(async () => {
     await MongooseHelper.connect(env.mongoUrl);
+    await TaskModel.deleteMany({});
   });
 
   afterAll(async () => {
