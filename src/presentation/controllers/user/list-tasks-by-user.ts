@@ -3,7 +3,7 @@ import { ListTaskByUser } from "../../../domain/useCases/user";
 import { badRequest, internalServerError, ok, notFound } from "../../helpers/http";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 
-export class ListTaskByUserController implements Controller {
+export class ListTasksByUserController implements Controller {
   private readonly listTaskByUser: ListTaskByUser;
   private readonly validator: Validator;
 
