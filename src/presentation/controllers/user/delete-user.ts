@@ -1,4 +1,5 @@
-import { DeleteUser, Validator } from "../../../domain/useCases/user";
+import { Validator } from "../../../domain/useCases/validator";
+import { DeleteUser } from "../../../domain/useCases/user";
 import { badRequest, internalServerError, noContent, notFound } from "../../helpers/http";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 

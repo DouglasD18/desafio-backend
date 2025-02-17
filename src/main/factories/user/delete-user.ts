@@ -1,6 +1,6 @@
 import { DeleteUserAdapter } from "../../../data/useCases/user";
 import { DeleteUserMongooseRepository } from "../../../infra/db/mongoose/repositories/user";
-import { DeleteUserZodValidator } from "../../../infra/validators";
+import { DeleteUserZodValidator } from "../../../infra/validators/user";
 import { DeleteUserController } from "../../../presentation/controllers/user/delete-user";
 
 export const makeDeleteUserController = (): DeleteUserController => {

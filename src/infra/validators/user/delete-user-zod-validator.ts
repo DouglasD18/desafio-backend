@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { Validated } from "../../domain/models/user";
-import { Validator } from "../../domain/useCases/user";
+import { Validated } from "../../../domain/models/validated";
+import { Validator } from "../../../domain/useCases/validator";
 
 const objectIdRegex = /^[0-9a-fA-F]{24}$/;
 

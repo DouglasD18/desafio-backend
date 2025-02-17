@@ -1,4 +1,5 @@
-import { ListUserById, Validator } from "../../..//domain/useCases/user";
+import { Validator } from "../../../domain/useCases/validator";
+import { ListUserById } from "../../../domain/useCases/user";
 import { CreateTask } from "../../../domain/useCases/task";
 import { badRequest, created, internalServerError, notFound } from "../../helpers/http";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";

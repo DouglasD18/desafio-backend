@@ -1,6 +1,6 @@
 import { UpdateUserAdapter } from "../../../data/useCases/user";
 import { UpdateUserMongooseRepository } from "../../../infra/db/mongoose/repositories/user";
-import { UpdateUserZodValidator } from "../../../infra/validators";
+import { UpdateUserZodValidator } from "../../../infra/validators/user";
 import { UpdateUserController } from "../../../presentation/controllers/user/update-user";
 
 export const makeUpdateUserController = (): UpdateUserController => {

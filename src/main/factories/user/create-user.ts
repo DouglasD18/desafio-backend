@@ -1,6 +1,6 @@
 import { CreateUserAdapter } from "../../../data/useCases/user";
 import { CreateUserMongooseRepository } from "../../../infra/db/mongoose/repositories/user";
-import { CreateUserZodValidator } from "../../../infra/validators";
+import { CreateUserZodValidator } from "../../../infra/validators/user";
 import { CreateUserController } from "../../../presentation/controllers/user/create-user";
 
 export const makeCreateUserController = (): CreateUserController => {
