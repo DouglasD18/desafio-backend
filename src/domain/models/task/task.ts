@@ -11,3 +11,10 @@ export enum TaskStatus {
   IN_PROGRESS = "em progresso",
   COMPLETED = "concluída",
 }
+
+export type TaskByUser = {
+  id: string;
+  title: string;
+  description: string;
+  status: TaskStatus;
+}
