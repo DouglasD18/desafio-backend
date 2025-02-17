@@ -1,24 +1,24 @@
-import { UpdateUserZodValidator } from "@/infra/validators";
-import { Validated } from "@/domain/models/user";
+import { CreateUserZodValidator } from "@/infra/validators/user";
+import { Validated } from "@/domain/models/validated";
 
 const PAYLOAD = {
-  id: "65b172bd7c863c5b7732c559", 
   name: "John Doe",
   email: "john.doe@example.com",
   password: "SenhaForte123!"
 }
 
-describe("UpdateUserZodValidator", () => {
-  let validator: UpdateUserZodValidator;
+describe("CreateUserZodValidator", () => {
+  let validator: CreateUserZodValidator;
 
   beforeEach(() => {
-    validator = new UpdateUserZodValidator();
+    validator = new CreateUserZodValidator();
   });
 
   it("Should return isValid false if name is too short", () => {
     const invalidBody = {
-      ...PAYLOAD,  
       name: "Jo",
+      email: PAYLOAD.email,
+      password: PAYLOAD.password
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -29,8 +29,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if email is invalid", () => {
     const invalidBody = {
-      ...PAYLOAD,  
+      name: PAYLOAD.name,
       email: "invalid-email",
+      password: PAYLOAD.password
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -41,8 +42,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if password is too short", () => {
     const invalidBody = {
-      ...PAYLOAD,  
-      password: "123",
+      name: PAYLOAD.name,
+      email: PAYLOAD.email,
+      password: "123"
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -53,8 +55,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if password does not contain uppercase letter", () => {
     const invalidBody = {
-      ...PAYLOAD,  
-      password: "senha123!",
+      name: PAYLOAD.name,
+      email: PAYLOAD.email,
+      password: "senha123!"
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -65,8 +68,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if password does not contain lowercase letter", () => {
     const invalidBody = {
-      ...PAYLOAD,  
-      password: "SENHA123!",
+      name: PAYLOAD.name,
+      email: PAYLOAD.email,
+      password: "SENHA123!"
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -77,8 +81,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if password does not contain a number", () => {
     const invalidBody = {
-      ...PAYLOAD,  
-      password: "SenhaForte!",
+      name: PAYLOAD.name,
+      email: PAYLOAD.email,
+      password: "SenhaForte!"
     };
 
     const result: Validated = validator.handle(invalidBody);
@@ -89,8 +94,9 @@ describe("UpdateUserZodValidator", () => {
 
   it("Should return isValid false if password does not contain a special character", () => {
     const invalidBody = {
-      ...PAYLOAD,  
-      password: "SenhaForte123",
+      name: PAYLOAD.name,
+      email: PAYLOAD.email,
+      password: "SenhaForte123"
     };
 
     const result: Validated = validator.handle(invalidBody);

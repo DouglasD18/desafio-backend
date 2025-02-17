@@ -1,15 +1,15 @@
-import { UpdateUserZodValidator } from "@/infra/validators";
-import { Validated } from "@/domain/models/user";
+import { DeleteUserZodValidator } from "@/infra/validators/user";
+import { Validated } from "@/domain/models/validated";
 
 const PAYLOAD = {
   id: "65b172bd7c863c5b7732c559"
 }
 
-describe("UpdateUserZodValidator", () => {
-  let validator: UpdateUserZodValidator;
+describe("DeleteUserZodValidator", () => {
+  let validator: DeleteUserZodValidator;
 
   beforeEach(() => {
-    validator = new UpdateUserZodValidator();
+    validator = new DeleteUserZodValidator();
   });
 
   it("Should return isValid false if id is not provided", () => {

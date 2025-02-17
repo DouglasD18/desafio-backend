@@ -1,5 +1,7 @@
-import { UpdateUserPayload, Validated } from "@/domain/models/user";
-import { UpdateUser, Validator } from "@/domain/useCases/user";
+import { UpdateUserPayload } from "@/domain/models/user";
+import { Validated } from "@/domain/models/validated";
+import { UpdateUser } from "@/domain/useCases/user";
+import { Validator } from "@/domain/useCases/validator";
 import { UpdateUserController } from "@/presentation/controllers/user/update-user";
 import { BadRequestError, InternalServerError, NotFoundError } from "@/presentation/errors";
 import { HttpRequest } from "@/presentation/protocols";

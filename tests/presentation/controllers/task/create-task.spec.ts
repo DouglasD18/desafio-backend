@@ -1,10 +1,12 @@
 import { CreateTaskController } from "@/presentation/controllers/task/create-task";
 import { CreateTask } from "@/domain/useCases/task";
-import { ListUserById, Validator } from "@/domain/useCases/user";
+import { ListUserById } from "@/domain/useCases/user";
+import { Validator } from "@/domain/useCases/validator";
 import { HttpRequest } from "@/presentation/protocols";
 import { badRequest, created, internalServerError, notFound } from "@/presentation/helpers/http";
 import { TaskStatus, CreateTaskResponse } from "@/domain/models/task";
-import { Validated, User } from "@/domain/models/user";
+import { User } from "@/domain/models/user";
+import { Validated } from "@/domain/models/validated";
 
 const VALIDATED: Validated = { isValid: true };
 const TASK_ID = "any_task_id";

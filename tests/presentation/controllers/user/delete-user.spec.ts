@@ -1,5 +1,6 @@
-import { Validated } from "@/domain/models/user";
-import { DeleteUser, Validator } from "@/domain/useCases/user";
+import { Validated } from "@/domain/models/validated";
+import { DeleteUser } from "@/domain/useCases/user";
+import { Validator } from "@/domain/useCases/validator";
 import { DeleteUserController } from "@/presentation/controllers/user/delete-user";
 import { BadRequestError, InternalServerError, NotFoundError } from "@/presentation/errors";
 import { HttpRequest } from "@/presentation/protocols";

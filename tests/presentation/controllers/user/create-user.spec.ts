@@ -1,5 +1,7 @@
-import { CreateUserPayload, CreateUserResponse, Validated } from "@/domain/models/user";
-import { CreateUser, Validator } from "@/domain/useCases/user";
+import { CreateUserPayload, CreateUserResponse } from "@/domain/models/user";
+import { Validated } from "@/domain/models/validated";
+import { CreateUser } from "@/domain/useCases/user";
+import { Validator } from "@/domain/useCases/validator";
 import { CreateUserController } from "@/presentation/controllers/user/create-user";
 import { BadRequestError, InternalServerError } from "@/presentation/errors";
 import { HttpRequest } from "@/presentation/protocols";
