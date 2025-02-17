@@ -24,20 +24,19 @@ describe("ListTasksByUserMongooseRepository", () => {
 
     userId = user._id.toString();
 
-    await TaskModel.create([
-      {
-        userId,
-        title: "Task 1",
-        description: "Description 1",
-        status: "pendente"
-      },
-      {
-        userId,
-        title: "Task 2",
-        description: "Description 2",
-        status: "em_progresso"
-      }
-    ]);
+    await TaskModel.create({
+      userId,
+      title: "Task 1",
+      description: "Description 1",
+      status: "pendente"
+    });
+
+    await TaskModel.create({
+      userId,
+      title: "Task 2",
+      description: "Description 2",
+      status: "em progresso"
+    })
   });
 
   afterAll(async () => {
@@ -62,7 +61,7 @@ describe("ListTasksByUserMongooseRepository", () => {
       id: expect.any(String),
       title: "Task 2",
       description: "Description 2",
-      status: "em_progresso"
+      status: "em progresso"
     });
   });
 

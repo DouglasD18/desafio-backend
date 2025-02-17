@@ -4,7 +4,8 @@ export interface ITask extends Document {
   userId: Types.ObjectId;
   title: string;
   description: string;
-  status: "pendente" | "em_progresso" | "concluído";
+  status: "pendente" | "em progresso" | "concluído";
+  createdAt: Date;
 }
 
 const TaskSchema = new Schema<ITask>(
@@ -14,7 +15,7 @@ const TaskSchema = new Schema<ITask>(
     description: { type: String, required: true }, 
     status: { 
       type: String, 
-      enum: ["pendente", "em_progresso", "concluído"], 
+      enum: ["pendente", "em progresso", "concluído"], 
       required: true 
     },
   },

@@ -7,7 +7,8 @@ const Tasks: Task[] = [{
   userId: "userId",
   title: "valid_titile",
   description: "A description",
-  status: TaskStatus.PENDING
+  status: TaskStatus.PENDING,
+  createdAt: new Date() 
 }];
 
 const makeListTasksRepositoryStub = (): ListTasksRepository => {

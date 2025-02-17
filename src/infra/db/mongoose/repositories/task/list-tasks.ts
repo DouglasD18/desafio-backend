@@ -12,7 +12,8 @@ export class ListTasksMongooseRepository implements ListTasksRepository {
       title: task.title,
       description: task.description,
       status: task.status as TaskStatus,
-      userId: task.userId.toString()
+      userId: task.userId.toString(),
+      createdAt: task.createdAt
     }));
   }
 }

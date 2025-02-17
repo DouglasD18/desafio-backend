@@ -33,24 +33,22 @@ describe("ListTasksMongooseRepository", () => {
 
   it("should return all tasks", async () => {
     const sut = makeSut();
-
-    await TaskModel.create([
-      {
-        userId,
-        title: "Task 1",
-        description: "Description 1",
-        status: "pendente"
-      },
-      {
-        userId,
-        title: "Task 2",
-        description: "Description 2",
-        status: "em_progresso"
-      }
-    ]);
-
+  
+    await TaskModel.create({
+      userId,
+      title: "Task 1",
+      description: "Description 1",
+      status: "pendente"
+    });
+    await TaskModel.create({
+      userId,
+      title: "Task 2",
+      description: "Description 2",
+      status: "em progresso"
+    });
+  
     const tasks: Task[] = await sut.handle();
-
+  
     expect(tasks).toHaveLength(2);
     expect(tasks[0]).toMatchObject({
       id: expect.any(String),
@@ -62,9 +60,9 @@ describe("ListTasksMongooseRepository", () => {
       id: expect.any(String),
       title: "Task 2",
       description: "Description 2",
-      status: "em_progresso"
+      status: "em progresso"
     });
-  });
+  });  
 
   it("should return an empty array if has no tasks", async () => {
     await TaskModel.deleteMany({});

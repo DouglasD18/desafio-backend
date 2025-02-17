@@ -11,7 +11,8 @@ export class ListTasksByUserMongooseRepository implements ListTasksByUserReposit
       id: task._id.toString(),
       title: task.title,
       description: task.description,
-      status: task.status as TaskStatus 
+      status: task.status as TaskStatus,
+      createdAt: task.createdAt
     }));
   }
 }

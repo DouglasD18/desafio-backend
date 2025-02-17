@@ -4,6 +4,7 @@ export type Task = {
   description: string;
   status: TaskStatus;
   userId: string;
+  createdAt: Date;
 }
 
 export enum TaskStatus {
@@ -17,4 +18,5 @@ export type TaskByUser = {
   title: string;
   description: string;
   status: TaskStatus;
+  createdAt: Date;
 }

@@ -11,7 +11,8 @@ const Tasks: Task[] = [{
   title: "Task Test",
   description: "Task description",
   status: TaskStatus.PENDING,
-  userId: "any_user_id"
+  userId: "any_user_id",
+  createdAt: new Date()
 }]
 
 interface SutTypes {

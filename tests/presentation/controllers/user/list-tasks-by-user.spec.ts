@@ -15,8 +15,8 @@ const REQUEST: HttpRequest = {
 };
 
 const TASKS = [
-  { id: "task_1", title: "Task 1", description: "Desc 1", status: "pending" },
-  { id: "task_2", title: "Task 2", description: "Desc 2", status: "completed" }
+  { id: "task_1", title: "Task 1", description: "Desc 1", status: "pending", createdAt: new Date() },
+  { id: "task_2", title: "Task 2", description: "Desc 2", status: "completed", createdAt: new Date() }
 ];
 
 const makeListTasksByUserStub = (): ListTaskByUser => {
