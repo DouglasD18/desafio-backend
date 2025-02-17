@@ -6,6 +6,7 @@ import { env } from "@/main/config/env";
 describe("CreateUserMongooseRepository", () => {
   beforeAll(async () => {
     await MongooseHelper.connect(env.mongoUrl);
+    await UserModel.deleteMany({});
   });
 
   afterAll(async () => {

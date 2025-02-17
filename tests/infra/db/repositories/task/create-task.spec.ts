@@ -8,6 +8,7 @@ describe("CreateTaskMongooseRepository", () => {
   beforeAll(async () => {
     await MongooseHelper.connect(env.mongoUrl);
     await TaskModel.deleteMany({});
+    await UserModel.deleteMany({});
   });
 
   afterAll(async () => {
