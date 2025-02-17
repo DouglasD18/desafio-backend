@@ -1,18 +1,20 @@
 import { MongooseHelper } from "@/infra/db/mongoose/mongoose-helper";
-import { ListTaskByIdMongooseRepository } from "@/infra/db/mongoose/repositories/task";
+import { ListTasksByUserMongooseRepository } from "@/infra/db/mongoose/repositories/task";
 import { TaskModel, UserModel } from "@/infra/db/mongoose/schemas";
 import { TaskByUser } from "@/domain/models/task";
 import { env } from "@/main/config/env";
 
 let userId: string;
 
-const makeSut = (): ListTaskByIdMongooseRepository => {
-  return new ListTaskByIdMongooseRepository();
+const makeSut = (): ListTasksByUserMongooseRepository => {
+  return new ListTasksByUserMongooseRepository();
 };
 
-describe("ListTaskByIdMongooseRepository", () => {
+describe("ListTasksByUserMongooseRepository", () => {
   beforeAll(async () => {
     await MongooseHelper.connect(env.mongoUrl);
+    await TaskModel.deleteMany({});
+    await UserModel.deleteMany({});
 
     const user = await UserModel.create({
       name: "John Doe",

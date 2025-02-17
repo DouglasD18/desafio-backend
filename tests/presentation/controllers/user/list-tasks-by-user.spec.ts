@@ -1,4 +1,4 @@
-import { ListTaskByUserController } from "@/presentation/controllers/user/list-task-by-user";
+import { ListTasksByUserController } from "@/presentation/controllers/user/list-tasks-by-user";
 import { Validator } from "@/domain/useCases/validator";
 import { ListTaskByUser } from "@/domain/useCases/user";
 import { HttpRequest } from "@/presentation/protocols";
@@ -19,13 +19,13 @@ const TASKS = [
   { id: "task_2", title: "Task 2", description: "Desc 2", status: "completed" }
 ];
 
-const makeListTaskByUserStub = (): ListTaskByUser => {
-  class ListTaskByUserStub implements ListTaskByUser {
+const makeListTasksByUserStub = (): ListTaskByUser => {
+  class ListTasksByUserStub implements ListTaskByUser {
     async handle(userId: string): Promise<any[]> {
       return TASKS;
     }
   }
-  return new ListTaskByUserStub();
+  return new ListTasksByUserStub();
 };
 
 const makeValidatorStub = (): Validator => {
@@ -38,20 +38,20 @@ const makeValidatorStub = (): Validator => {
 };
 
 interface SutTypes {
-  sut: ListTaskByUserController;
-  listTaskByUserStub: ListTaskByUser;
+  sut: ListTasksByUserController;
+  listTasksByUserStub: ListTaskByUser;
   validatorStub: Validator;
 }
 
 const makeSut = (): SutTypes => {
-  const listTaskByUserStub = makeListTaskByUserStub();
+  const listTasksByUserStub = makeListTasksByUserStub();
   const validatorStub = makeValidatorStub();
-  const sut = new ListTaskByUserController(listTaskByUserStub, validatorStub);
+  const sut = new ListTasksByUserController(listTasksByUserStub, validatorStub);
 
-  return { sut, listTaskByUserStub, validatorStub };
+  return { sut, listTasksByUserStub, validatorStub };
 };
 
-describe("ListTaskByUserController", () => {
+describe("ListTasksByUserController", () => {
   it("Should call Validator with correct values", async () => {
     const { sut, validatorStub } = makeSut();
 
@@ -70,28 +70,28 @@ describe("ListTaskByUserController", () => {
     expect(response).toEqual(badRequest("Validation error"));
   });
 
-  it("Should call ListTaskByUser with correct values", async () => {
-    const { sut, listTaskByUserStub } = makeSut();
+  it("Should call ListTasksByUser with correct values", async () => {
+    const { sut, listTasksByUserStub } = makeSut();
 
-    const listTaskSpy = jest.spyOn(listTaskByUserStub, "handle");
+    const listTaskSpy = jest.spyOn(listTasksByUserStub, "handle");
     await sut.handle(REQUEST);
 
     expect(listTaskSpy).toHaveBeenCalledWith(USER_ID);
   });
 
-  it("Should return 404 if ListTaskByUser throws 'Usuário não encontrado'", async () => {
-    const { sut, listTaskByUserStub } = makeSut();
+  it("Should return 404 if ListTasksByUser throws 'Usuário não encontrado'", async () => {
+    const { sut, listTasksByUserStub } = makeSut();
 
-    jest.spyOn(listTaskByUserStub, "handle").mockRejectedValue(new Error("Usuário não encontrado"));
+    jest.spyOn(listTasksByUserStub, "handle").mockRejectedValue(new Error("Usuário não encontrado"));
     const response = await sut.handle(REQUEST);
 
     expect(response).toEqual(notFound("Usuário não encontrado"));
   });
 
-  it("Should return 500 if ListTaskByUser throws an unexpected error", async () => {
-    const { sut, listTaskByUserStub } = makeSut();
+  it("Should return 500 if ListTasksByUser throws an unexpected error", async () => {
+    const { sut, listTasksByUserStub } = makeSut();
 
-    jest.spyOn(listTaskByUserStub, "handle").mockRejectedValue(new Error("Internal error"));
+    jest.spyOn(listTasksByUserStub, "handle").mockRejectedValue(new Error("Internal error"));
     const response = await sut.handle(REQUEST);
 
     expect(response).toEqual(internalServerError("Internal error"));
