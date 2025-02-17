@@ -3,7 +3,7 @@ import { Validated } from "@/domain/models/validated";
 import { TaskStatus } from "@/domain/models/task";
 
 const PAYLOAD = {
-  userId: "64f8eaa4b5b6c0b15a8e4e91", 
+  id: "64f8eaa4b5b6c0b15a8e4e91", 
   status: TaskStatus.PENDING
 };
 
@@ -14,10 +14,10 @@ describe("UpdateStatusZodValidator", () => {
     validator = new UpdateStatusZodValidator();
   });
 
-  it("Should return isValid false if userId is invalid", () => {
+  it("Should return isValid false if id is invalid", () => {
     const invalidBody = {
       ...PAYLOAD,
-      userId: "invalid_id"
+      id: "invalid_id"
     };
 
     const result: Validated = validator.handle(invalidBody);
