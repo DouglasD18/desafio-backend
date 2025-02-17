@@ -6,7 +6,7 @@ const objectIdRegex = /^[0-9a-fA-F]{24}$/;
 
 export class UpdateStatusZodValidator implements Validator {
   private schema = z.object({
-    userId: z.string().regex(objectIdRegex, "Id inválido"),
+    id: z.string().regex(objectIdRegex, "Id inválido"),
     status: z.enum(["pendente", "em progresso", "concluída"], { message: "Status inválido" })
   });
 
