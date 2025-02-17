@@ -1,6 +1,6 @@
 import { User } from "../../../../../domain/models/user";
 import { ListUserByIdRepository } from "../../../../../data/protocols/user";
-import { UserModel } from "../../schemas/user";
+import { UserModel } from "../../schemas";
 
 export class ListUserByIdMongooseRepository implements ListUserByIdRepository {
   async handle(id: string): Promise<User> {

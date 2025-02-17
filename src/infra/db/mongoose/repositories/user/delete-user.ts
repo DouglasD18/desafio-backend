@@ -1,5 +1,5 @@
 import { DeleteUserRepository } from "../../../../../data/protocols/user";
-import { UserModel } from "../../schemas/user";
+import { UserModel } from "../../schemas";
 
 export class DeleteUserMongooseRepository implements DeleteUserRepository {
   async handle(id: string): Promise<boolean> {

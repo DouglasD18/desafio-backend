@@ -1,6 +1,6 @@
 import { UpdateUserRepository } from "../../../../../data/protocols/user";
 import { UpdateUserPayload } from "../../../../../domain/models/user";
-import { UserModel } from "../../schemas/user";
+import { UserModel } from "../../schemas";
 
 export class UpdateUserMongooseRepository implements UpdateUserRepository {
   async handle(payload: UpdateUserPayload): Promise<boolean> {

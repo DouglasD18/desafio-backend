@@ -1,6 +1,6 @@
 import { CreateUserRepository } from "../../../../../data/protocols/user";
 import { CreateUserPayload } from "../../../../../domain/models/user";
-import { UserModel } from "../../schemas/user";
+import { UserModel } from "../../schemas";
 
 export class CreateUserMongooseRepository implements CreateUserRepository {
   async handle(payload: CreateUserPayload): Promise<string> {
