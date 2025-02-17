@@ -9,6 +9,8 @@ let taskId: string;
 describe("UpdateStatusMongooseRepository", () => {
   beforeAll(async () => {
     await MongooseHelper.connect(env.mongoUrl);
+    await TaskModel.deleteMany({});
+    await UserModel.deleteMany({});
     
     const user = await UserModel.create({
       name: "John Doe",
