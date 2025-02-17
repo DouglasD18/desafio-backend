@@ -1,3 +1,3 @@
-export * from "./create-user-zod-validator";
-export * from "./update-user-zod-validator";
-export * from "./delete-user-zod-validator";
+export * from "./create-user";
+export * from "./update-user";
+export * from "./delete-user";
